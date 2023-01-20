@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        /*  数据以键值对的方式保存，其中属性值必须是字符串。如果你setItem(key,value) value传的参数不是字符串
+        JS内部会帮你调用value.toString再存储*/
+
+
+        let aa = 18
+        
+        console.log(typeof aa)
+
+       sessionStorage.setItem('test',aa)
+
+       let value = sessionStorage.getItem('test')
+
+       console.log(typeof value)
+
+
+
+       let aa2 = [1,2,3]
+        
+        console.log(typeof aa2)
+
+        console.log(aa2.toString() === '1,2,3')
+
+       sessionStorage.setItem('test2',aa2)
+
+       let value2 = sessionStorage.getItem('test2')
+
+       console.log(typeof value2)
+
+
+       let aa3 = {
+        a:1,
+        b:2
+       }
+
+       console.log(aa3.toString())
+
+
+       
+    </script>
+</body>
+</html>

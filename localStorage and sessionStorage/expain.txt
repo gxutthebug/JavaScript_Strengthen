@@ -1,0 +1,10 @@
+ localStorage  跟  sessionStorage这两个全局对象拥有一样的API，但是他们两各自将数据存在网页的两块不同空间中。
+ localStorage将数据存到网页的本地存储空间内
+sessionStorage将数据存到网页的会话存储空间内。
+其中前者会永远保存在网页中，而后者只在网页打开期间保存 网页关闭数据清除
+（每个网页的这两块空间都是独立的）
+
+
+数据以键值对的方式保存，其中属性值必须是字符串。如果你setItem(key,value) value传的参数不是字符串
+JS内部会帮你调用value.toString再存储
+

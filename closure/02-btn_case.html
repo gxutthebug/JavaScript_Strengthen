@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>测试1</button>
+    <button>测试2</button>
+    <button>测试3</button>
+    <button>测试4</button>
+
+
+
+
+    <script>
+
+/*for(var i=0 ; i <3;i++){
+    这里是逻辑代码块:
+    同步+异步
+}
+for循环的本质是,创造出n个相互独立的！！代码块。并且先顺序执行所有同步代码后再回头执行异步代码;值得注意的是像btn.onclick = function () {} 这种代码,事件绑定属于同步代码
+后面那个回调函数大括号内的逻辑才是异步代码;这也是为什么用var 声明  var btn = btns[i]依然能给所有按钮绑定事件的原因,因为绑定事件是同步代码！！！同步代码的i是当下即时的
+{
+    这里是逻辑代码块(i=1):
+    同步+异步
+}
+
+{
+    这里是逻辑代码块(i=2):
+    同步+异步
+}
+
+{
+    这里是逻辑代码块(i=3):
+    同步+异步
+}
+*/
+
+
+
+        var btns = document.getElementsByTagName('button')
+
+//btns是一个伪数组,与普通数组不同,他的length属性不是一个固定值,而是每一次访问都会通过计算获得
+//我们提前用一个length变量接收btns.length,就可以避免他每一次循环都重复计算,提高了性能
+        /*for(var i=0,length=btns.length ; i<length; i++ ){
+            var btn = btns[i]
+            btn.onclick = function (){
+                alert(i+1)
+            }
+          }
+        console.log(i)      
+        console.log(btn)*/
+        //由于用var定义了这个循环变量i,所以这个i是全局的,整个过程只产生这一个全局变量,这个全局变量每次循环都会被这一轮的i值覆盖,最后循环结束后就成了4
+        /*btn.onclick这个函数作用域内访问i,根据作用域链的原理,我们知道程序在本层局部作用域内找不到i就会往外层作用域找这个i,
+      先找到外面一层的块级作用域发现块级作用域内没有声明这个i,然后继续往外找全局作用域，最终就找到了全局作用域这个i(4)*/
+
+/*-------------------------------- 解决方案1:用let定义循环变量-----------------------------------------------------------*/
+        // for(let i=0,length=btns.length ; i<length; i++ ){
+        //     let btn = btns[i]
+        //     btn.onclick = function (){
+        //         alert('这是第'+(i+1)+'个按钮')
+        //     }
+        // }
+         // console.log(i)
+        // console.log(btn)
+
+          //btn.onclick这个函数作用域内访问i,根据上面说的,程序往外层作用域找i,先找外层的块级作用域,let声明是在每个块里独立的声明一个i=x,所以最终在块级作用域里找到了i=x
+
+
+/*-------------------------------- 解决方案2:不用let的传统方法,把每一轮的i作为一个属性绑定到每个btn上,点击btn时直接访问这个属性而不去直接访问这个循环变量i------------*/
+        /* for(var i=0,length=btns.length ; i<length; i++ ){
+            var btn = btns[i]
+            btn.index = 1
+            btn.onclick = function (){
+                alert('这是第'+(this.index+1)+'个按钮')
+            }
+        }*/
+
+/*-------------------------------- 解决方案3:利用闭包------------*/
+ /*立即执行函数是为了产生局部函数作用域保存每一次的循环的i,本质就是既然我们没有用let产生块级作用域变量,那就想办法让它产生一个局部作用域来独立的保存每一次i*/  
+ /*闭包在哪呢? 各个i已经被保存在独立的3个函数内了,为啥能让回调函数访问到呢,回调函数访问这个i就产生了闭包*/     
+for(var i=0,length=btns.length ; i<length; i++ ){
+   (function (i) {
+    var btn = btns[i]
+    btn.onclick = function (){
+                alert('这是第'+(i+1)+'个按钮')
+            }
+   })(i)
+        }
+    </script>
+    
+</body>
+</html>
