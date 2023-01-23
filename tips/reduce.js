@@ -12,10 +12,14 @@ let b= [1,2,3,4].reduce(function(auto,value,index,arr){
 },10)
 console.log(b) // 20
 
-console.log('------------------------------------------------------------------------------------------')
 
-// reduce()的九大应用场景
-// reduce()的应用一般分为两种: ①求和统计  ②前后拼接
+
+console.log('---------------------------------------reduce()的九大应用场景---------------------------------------------------')
+
+
+// reduce()的应用一般分为两种: 求和 / 统计  
+//本质是前后拼接: 这种拼接可以是传统的数组拼接 字符串拼接;也可以是一种抽象的[ ]  { } 的容器的内容的逐步填充(统计) ; 也可以是某个计算数值的逐步计算
+
 
 
 
@@ -148,3 +152,80 @@ let people = [
   console.log(myArrayWithNoDuplicates)
 
 
+// 8.结合函数数组实现函数管道
+// 这是函数式编程的一种组合思路
+
+
+const double = x => x + x
+const triple = x => 3 * x
+const quadruple = x => 4 * x
+
+
+const pipe = (...functions) =>{ // pipe返回的是一个组合后的管道函数
+     return (initialValue) =>{
+      return functions.reduce((acc, fn) =>{
+        return fn(acc)
+       },initialValue)
+     }
+}
+
+
+// Composed functions for multiplication of specific values
+const multiply6 = pipe(double, triple)
+const multiply9 = pipe(triple, triple)
+const multiply16 = pipe(quadruple, quadruple)
+const multiply24 = pipe(double, triple, quadruple)
+
+// Usage
+console.log(multiply6(6))  // 36
+console.log(multiply9(9))   // 81
+console.log(multiply16(16)) // 256
+console.log(multiply24(10)) // 240
+
+
+
+// 9. 顺序执行promise,目前看不懂
+
+/**
+ * Runs promises from array of functions that can return promises
+ * in chained manner
+ *
+ * @param {array} arr - promise arr
+ * @return {Object} promise object
+ */
+function runPromiseInSequence(arr, input) {
+  return arr.reduce(
+    (promiseChain, currentFunction) => promiseChain.then(currentFunction),
+    Promise.resolve(input)
+  )
+}
+
+// promise function 1
+function p1(a) {
+  return new Promise((resolve, reject) => {
+    resolve(a * 5)
+  })
+}
+
+// promise function 2
+function p2(a) {
+  return new Promise((resolve, reject) => {
+    resolve(a * 2)
+  })
+}
+
+// function 3  - will be wrapped in a resolved promise by .then()
+function f3(a) {
+ return a * 3
+}
+
+// promise function 4
+function p4(a) {
+  return new Promise((resolve, reject) => {
+    resolve(a * 4)
+  })
+}
+
+const promiseArr = [p1, p2, f3, p4]
+runPromiseInSequence(promiseArr, 10)
+  .then(console.log)   // 1200

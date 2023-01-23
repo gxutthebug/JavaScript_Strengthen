@@ -18,7 +18,7 @@ var animals = [
   }
 
 
-  //③ “方法借用”:使用 call 方法调用函数并且指定上下文的 'this'
+  //③ 使用 call 方法调用函数并且指定上下文的 'this'
   function greet() {
     var reply = [this.animal, 'typically sleep between', this.sleepDuration].join(' ');
     console.log(reply);
