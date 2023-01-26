@@ -19,7 +19,7 @@ console.log(i)
 for(let k =0 ; i<4;i++){
     console.log(k)
 }
-// console.log(k)  报错 not defind
+ console.log(k)   //报错 not defind
 
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -36,3 +36,26 @@ if (true) {
     console.log(m)  // 这行会报错，因为这里是死区，禁止访问m
     let m =60  // 变量声明，下面不在死区（解除）
 }
+
+
+/*-----------------------------------------------------------------------------------------------*/
+if(true){
+    let a =108
+
+    if(true) {
+        console.log(a)  // 108
+    }
+}
+
+
+let age = 88889
+
+if(true) {
+    console.log(age)  // 88889
+}
+
+function on (){
+    console.log(age)  // 88889
+}
+
+on()

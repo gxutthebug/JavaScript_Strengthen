@@ -1,2 +1,12 @@
 学习路线资源在线链接：https://www.processon.com/view/link/61c53fb31efad45a2b42afd9
 前端面试题汇总资源：https://github.com/whylisa/front-end-interview
+
+
+null undefnd 这两种类型 可以直接用 === / !== 判断
+因为只有一个值
+不需要用typeof
+
+
+let : ① 阻止外层访问内层,允许内层访问外层
+      ② 内外层有同名变量时,阻止外层变量污染,以内层定义的let变量为准（死区）
+      ③  for循环的循环变量用let定义
