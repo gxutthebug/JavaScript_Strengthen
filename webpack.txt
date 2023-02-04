@@ -1,0 +1,36 @@
+项目准备
+yarn init
+yarn add webpack webpack-cli -D
+
+
+1_webpack默认的打包命令是：yarn  webpack 
+
+可以在packge.json 里面设置修改
+"scripts": {
+    "build": "webpack"
+  },
+
+
+2_webpack默认的模块化语法是Common.js
+
+可以在packge.json 里面设置修改成ES6的：
+
+    "type": "module"
+
+
+
+3_webpack默认的热部署服务器启动命令是：yarn serve
+
+可以在packge.json 里面设置修改：
+"scripts": {
+    "serve": "xxxxxxxxxxxxx"
+  },
+
+
+4_webpack默认的打包入口是src/index.js,并且默认入口只有一个
+
+
+
+5_webpack默认的打包出口是dist/main.js
+bundle------一束 一捆 包（软件包）
+
