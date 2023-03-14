@@ -3,9 +3,10 @@
 console.log(String({ a: 2 }))           // "[object Object]"
 console.log(String([1, 2]) )              // "1,2"
 console.log(String(/reg/g))               // "/reg/g"
-// 可以看到Object的子类型之间toString并不一致
+
 // 实际上在对Object类型进行String转换的时候，
 // 会调用原型链上的toString方法，并作为结果返回
+// 可以看到Object的子类型之间toString并不一致
 var arr = [1, 2];
 arr.toString()             // "1,2"
 String(arr)                // "1,2"
