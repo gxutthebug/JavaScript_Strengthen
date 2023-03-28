@@ -13,10 +13,11 @@ function Student (name, age,className) {
                                  // 但是实际上这里执行了 Person构造函数,用别人的构造函数构造我自己的实例对象
                                  //  由于Person.call(this, name, age)构造的属性最终是挂载到具体子类的实例对象上的,自然不会存在实例共享原型对象的问题！！！！
     this.className =className
+    this.age =66  // 会覆盖继承的
 }
 
 let stu1 =new Student('yfm',22,202)
-// console.log(stu1)
+console.log(stu1)
 // console.log(stu1.name)
 
 

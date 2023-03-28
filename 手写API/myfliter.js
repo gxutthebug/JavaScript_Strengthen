@@ -4,14 +4,10 @@ Array.prototype.myfliter = function (callback) {
     let newarr = []
     let len = this.length
     for (let i =0; i<len ; i++ ){
-       if(callback(this[i],i,this)) {
-      
+       if(callback(this[i],i,this)) { 
             newarr.push(this[i])
-        
-        
        }
     } 
-
     return newarr
 }
 

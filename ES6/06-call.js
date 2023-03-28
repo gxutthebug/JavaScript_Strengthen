@@ -18,7 +18,8 @@ var animals = [
   }
 
 
-  //③ 使用 call 方法调用函数并且指定上下文的 'this'
+  //③ 使用 call 方法可以调用内部含有this的函数来指定函数体内的'this' , 这类方法原本只能obj.xxx()才有意义 ,现在可以写成xxx.call(obj)
+  //eg:  Array.prototype.map().call() 
   function greet() {
     var reply = [this.animal, 'typically sleep between', this.sleepDuration].join(' ');
     console.log(reply);
@@ -29,6 +30,7 @@ var animals = [
   };
   
   greet.call(obj);  // cats typically sleep between 12 and 16 hours
+  greet()  //  typically sleep between ( this.animal 与 this.sleepDuration 为空)
 
 
   // ④用来调用函数...........这个有点鸡肋
